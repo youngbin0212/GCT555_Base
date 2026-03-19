@@ -8,22 +8,22 @@ import numpy as np
 
 @dataclass
 class DepthConfig:
-    # 공통
-    smoothing_alpha: float = 0.20   # 0~1, 클수록 최신값 반영 강함
+    # common
+    smoothing_alpha: float = 0.20   # 0~1, larger values ​​reflect the latest value more strongly
     clamp_min: float = -20.0
     clamp_max: float = 20.0
 
-    # Face 전용
-    face_global_scale: float = 4.0      # tz 스케일
-    face_local_scale: float = 0.05      # landmark z의 상대 오프셋 스케일
-    face_invert_tz: bool = False        # 환경 따라 True 필요 가능
-    face_invert_local_z: bool = False   # 환경 따라 True 필요 가능
+    # for Face 
+    face_global_scale: float = 4.0      # tz scale
+    face_local_scale: float = 0.05      # Scale relative to landmark z offset
+    face_invert_tz: bool = False        # True may be required depending on environment
+    face_invert_local_z: bool = False   # True may be required depending on environment
 
-    # Pose / Hand 전용
+    # for Pose / Hand 
     pose_invert_world_z: bool = False
     hand_invert_world_z: bool = False
 
-    # 서버에서 디버그로 raw도 같이 보낼지
+    # Decide whether to send raw along with debug on the server
     include_debug_raw: bool = True
 
 
@@ -33,8 +33,8 @@ def _clamp(v: float, lo: float, hi: float) -> float:
 
 class DepthState:
     """
-    서버 프로세스 내부에서 프레임 간 smoothing을 유지.
-    pose/face는 single target, hand는 multi-hand를 고려해 index 기반으로 저장.
+    Maintains smoothing between frames within the server process.
+    Stores pose/face based on an index, considering single target and hand considering multi-hand.
     """
     def __init__(self, cfg: Optional[DepthConfig] = None):
         self.cfg = cfg or DepthConfig()
@@ -99,7 +99,7 @@ def build_pose_payload(
     pose_index: int = 0,
 ) -> Optional[Dict[str, Any]]:
     """
-    반환 형식:
+    return :
     {
       "landmarks": [...],
       "world_landmarks": [...],
@@ -161,7 +161,7 @@ def build_hand_payloads(
     depth_state: DepthState,
 ) -> List[Dict[str, Any]]:
     """
-    반환 형식:
+    return :
     [
       {
         "handedness": "...",
@@ -235,13 +235,13 @@ def build_face_payloads(
     depth_state: DepthState,
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, float]]]:
     """
-    Face는 공식적으로 3D landmarks + facial transformation matrix를 제공한다.
-    여기서는:
+    Face officially provides 3D landmarks + facial transformation matrix.
+
+    Here:
       - global_z = matrix tz
       - per_landmark_z = global_z + (landmark z * local_scale)
-    로 보낸다.
 
-    반환:
+    return:
       faces_data, raw_pose_debug
     """
     if not result or not getattr(result, "face_landmarks", None):

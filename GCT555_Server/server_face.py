@@ -19,8 +19,8 @@ depth_state = DepthState(
         smoothing_alpha=0.30,
         face_global_scale=1.0,
         face_local_scale=0.12,
-        face_invert_tz=False,       # Unity에서 가까워질수록 반대로 가면 True로 바꾸기
-        face_invert_local_z=False,  # 코가 뒤로 들어가 보이면 True 시도
+        face_invert_tz=False,       
+        face_invert_local_z=False,  
         clamp_min=-5.0,
         clamp_max=5.0,
     )
