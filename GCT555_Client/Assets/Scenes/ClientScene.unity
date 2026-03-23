@@ -837,7 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StreamManager
   wall1:
     name: Wall1
-    ipAddress: 10.249.201.41
+    ipAddress: 127.0.0.1
     quadTransform: {fileID: 60969004}
     activeType: 2
     poseSocketPort: 5050
@@ -850,7 +850,7 @@ MonoBehaviour:
     name: Wall2
     ipAddress: 127.0.0.1
     quadTransform: {fileID: 282124860}
-    activeType: 1
+    activeType: 2
     poseSocketPort: 5050
     handSocketPort: 5051
     faceSocketPort: 5052
