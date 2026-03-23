@@ -839,7 +839,7 @@ MonoBehaviour:
     name: Wall1
     ipAddress: 10.249.201.41
     quadTransform: {fileID: 60969004}
-    activeType: 1
+    activeType: 2
     poseSocketPort: 5050
     handSocketPort: 5051
     faceSocketPort: 5052
