@@ -21,7 +21,7 @@ public class StreamClient : MonoBehaviour
     public float landmarkScale = 0.04f;
     // Size of each landmark GameObject in Unity world space.
     // Increase for better visibility, decrease if landmarks look too large.
-    public float depthMultiplier = 10.0f; 
+    public float depthMultiplier = 10.0f; //10.0f; 
     // Multiplies incoming depth values before applying them to Z.
     // Increase this if forward/backward movement is too subtle.
     // Decrease it if landmarks move too far in depth.
@@ -47,7 +47,7 @@ public class StreamClient : MonoBehaviour
 
     //-----------------------------
     [Header("Depth-based XY Compensation")] 
-    public bool useXYDepthCompensation = true;
+    public bool useXYDepthCompensation = true; //false로 바꾸면 얼굴 점들 얼굴에 맞춰 움직임
     // Enables depth-based XY scale compensation.
     // Turn this on to reduce the apparent size change when the user moves closer/farther.
     public float xyDepthCompensationStrength = 1.0f;
