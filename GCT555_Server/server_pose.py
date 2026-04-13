@@ -29,8 +29,8 @@ depth_state = DepthState(
 SOCKET_HOST = '0.0.0.0'
 SOCKET_PORT = 5050
 WEB_PORT = 5000
-CAMERA_INDEX = 0
-DEBUG_MODE = False
+CAMERA_INDEX = 1 #0은 exo, 1은 ego
+DEBUG_MODE = True #False
 MODEL_PATH = 'models/pose_landmarker_heavy.task'
 
 # Global variables to share data between threads

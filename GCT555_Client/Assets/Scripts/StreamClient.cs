@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class StreamClient : MonoBehaviour
 {
-    public enum ClientType { Pose, Hand, Face }
+    public enum ClientType { Pose, Hand, Face, Cam, Cam2 }
 
     [Header("Connection Settings")]
     public string ipAddress = "127.0.0.1";
@@ -90,6 +90,8 @@ public class StreamClient : MonoBehaviour
     public void Connect()
     {
         if (isRunning) return;
+        if (clientType == ClientType.Cam) return; // 소켓 연결 불필요
+        if (clientType == ClientType.Cam2) return;
         try
         {
             socket = new TcpClient();
@@ -303,6 +305,12 @@ public class StreamClient : MonoBehaviour
 
                         UpdateHybridVisuals(allFaces, null, mergedDepth);
                     }
+                    break;
+                    case ClientType.Cam:
+                    // 영상만 표시, 소켓 데이터 없음
+                    break;
+                    case ClientType.Cam2:
+                    // 영상만 표시, 소켓 데이터 없음
                     break;
                 //--------------------------
             }

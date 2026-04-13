@@ -17,14 +17,21 @@ public class StreamManager : MonoBehaviour
         public int poseSocketPort = 5050;
         public int handSocketPort = 5051;
         public int faceSocketPort = 5052;
+        public int camSocketPort = 5053;
+        public int cam2SocketPort = 5054;
+        
         
         [Header("Web Ports (Video)")]
         public int poseWebPort = 5000;
         public int handWebPort = 5001;
         public int faceWebPort = 5002;
+        public int camWebPort = 5003;
+        public int cam2WebPort = 5004;
+
     }
 
-    public WallConfig wall1;
+    public WallConfig wall1_1;
+    public WallConfig wall1_2;
     public WallConfig wall2;
     
     public List<StreamClient> activeClients = new List<StreamClient>();
@@ -42,7 +49,8 @@ public class StreamManager : MonoBehaviour
 
     void Start()
     {
-        SetupWall(wall1);
+        SetupWall(wall1_1);
+        SetupWall(wall1_2);
         SetupWall(wall2);
     }
 
@@ -67,6 +75,14 @@ public class StreamManager : MonoBehaviour
             case StreamClient.ClientType.Face:
                 socketPort = config.faceSocketPort;
                 webPort = config.faceWebPort;
+                break;
+            case StreamClient.ClientType.Cam:
+                socketPort = config.camSocketPort;
+                webPort = config.camWebPort;
+                break;
+            case StreamClient.ClientType.Cam2:
+                socketPort = config.cam2SocketPort;
+                webPort = config.cam2WebPort;
                 break;
         }
 
